@@ -27,7 +27,10 @@ app.get('/', function (req, res) {
 
 app.get('/showall', async function (req, res) {
 	var files = await fs.readdir(path.join(path.resolve(), 'data/args'));
-	res.send(files);
+	var content = await fs.readFile(path.join(path.resolve(), 'data/args/args.txt'), 'utf8');
+	res.send({"files": files,
+				"content-args": content
+				});
 });
 
 app.listen(8080, function () {
