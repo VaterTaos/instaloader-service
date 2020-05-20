@@ -1,0 +1,7 @@
+--no-videos
+--geotags
+--comments
+--stories
+--fast-update
+--dirname-pattern=data/result/{profile}
+1e_clothing

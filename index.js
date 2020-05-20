@@ -1,0 +1,28 @@
+var express = require('express');
+var child_process = require('child_process');
+var app = express();
+var path = require('path');
+
+app.get('/', function (req, res) {
+	var args = req.query.args;
+	var command = `python ${path.join(path.resolve(), 'app/instaloader.py')} +data/args/${args}.txt`;
+	var cp = child_process.exec(command)
+	
+	cp.stdout.on('data', function (data) {
+	  console.log('stdout: ' + data.toString());
+	});
+
+	cp.stderr.on('data', function (data) {
+	  console.log('stderr: ' + data.toString());
+	});
+
+	cp.on('exit', function (code) {
+	  console.log('child process exited with code ' + code.toString());
+	});
+	
+	res.send(command);
+});
+
+app.listen(8080, function () {
+	console.log('services started!');
+});
