@@ -5,6 +5,7 @@ var path = require('path');
 
 app.get('/', function (req, res) {
 	var args = req.query.args;
+	console.log(path.resolve());
 	var command = `python ${path.join(path.resolve(), 'app/instaloader.py')} +data/args/${args}.txt`;
 	var cp = child_process.exec(command)
 	
