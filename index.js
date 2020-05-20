@@ -1,5 +1,6 @@
 var express = require('express');
 var child_process = require('child_process');
+var fs = require('fs-extra');
 var app = express();
 var path = require('path');
 
@@ -22,6 +23,11 @@ app.get('/', function (req, res) {
 	});
 	
 	res.send(command);
+});
+
+app.get('/showall', async function (req, res) {
+	var files = await fs.readdir(path.join(path.resolve(), 'data/args'));
+	res.send(files);
 });
 
 app.listen(8080, function () {
